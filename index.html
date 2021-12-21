@@ -1,11 +1,79 @@
-<style>
-img {
-	width: 400px;
-	height: 400px;
-	image-rendering: pixelated;
-}
-</style>
-<div id="poke"></div>
-<script src="app.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>pokemon</title>
+	<style>
+		img {
+			width: 300px;
+			height: 300px;
+			image-rendering: pixelated;
+		}
+
+		body {
+			background-image: url("wallpaper.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-attachment: fixed;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		#pokemons {
+			width: 90%;
+			
+			margin: auto;
+		}
+
+		.pokemon_info {
+			float: left;
+			max-width: 400px;
+			min-height: 400px;
+			overflow: visible;
+			background-color: aliceblue;
+			margin: 10px;
+			padding: 10px;
+		}
+		
+		.pokemon_info > p {
+			padding-left: 50px;
+		}
 
 
+		.pokemon_grass {
+			background-color: greenyellow;
+		}
+		.pokemon_fire {
+			background-color: orangered;
+			color: white;
+		}
+		.pokemon_water {
+			background-color: aqua;
+		}
+		.pokemon_electric {
+			background-color: yellow;
+		}
+		.pokemon_bug {
+			background-color: yellowgreen;
+		}
+		.pokemon_poison {
+			background-color: purple;
+			color: white;
+		}
+		.pokemon_ground {
+			background-color: burlywood;
+		}
+	</style>
+</head>
+
+<body>
+
+	<input type="text" id="search_pokemon">
+	<button id="search_button"></button>
+	<div id="pokemons"></div>
+	<script src="app.js"></script>
+</body>
+
+</html>
