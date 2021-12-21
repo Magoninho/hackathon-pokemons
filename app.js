@@ -82,7 +82,6 @@ async function getPokemonData(offset, limit) {
 
 function searchPokemon(regex, pokemonData) {
 	let foundPokemons = [];
-	console.log(pokemonData)
 	for (let p = 0; p < pokemonData.length; p++) {
 		const pokemon = pokemonData[p]; // pokemon element
 		// searching the pokemon
@@ -92,44 +91,37 @@ function searchPokemon(regex, pokemonData) {
 		}
 	}
 
-
+	
 	return foundPokemons;
 }
 
 (async () => {
 	const myDiv = document.getElementById("pokemons");
 	const pokemonData = await getPokemonData(0, 9);
-	await renderPokemons(pokemonData, myDiv);
+	renderPokemons(pokemonData, myDiv);
 
 	let input = document.getElementById("search_pokemon");
 
-	await input.addEventListener("input", (async () => {
-		let offset = 0;
+	input.addEventListener("input", (async () => {
 
 		// searching pokemons with the input value
-		// let pokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
+		let pokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
 
-		let found = false;
-		while (!found) {
-			let pokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), (await getPokemonData(offset, 32)));
-			offset += 32;
-			renderPokemons(pokemonSearch, myDiv);
-		}
-		console.log("achou")
+		renderPokemons(pokemonSearch, myDiv);
 
 	}));
 
 	let btn_more = document.getElementById("btn-more");
 	
 	
-	await btn_more.addEventListener("click", (async () => {
+	btn_more.addEventListener("click", (async () => {
 		const newPokemonData = await getPokemonData(limit, 9);
 		for (let i = 0; i < newPokemonData.length; i++) {
 			pokemonData.push(newPokemonData[i]);
 		}
 		limit += 9;
-		// const newPokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
 
+		const newPokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
 
 		renderPokemons(newPokemonSearch, myDiv);
 	}));
