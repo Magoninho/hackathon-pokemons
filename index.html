@@ -5,8 +5,30 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>pokemon</title>
 	<style>
+
+		:root{
+			--normal: #A8A878;
+			--fire: #F08030;
+			--ghost: #705898;
+			--rock: #5A4D41;
+			--ground: #E0C068;
+			--grass: #78C850;
+			--poison: #A040A0;
+			--fairy: #F0B6BC;
+			--water: #6890F0;
+			--steal: #B8B8D0;
+			--bug: #A8B820;
+			--flying: #A890F0;
+			--electric: #F8D030;
+			--ice: #98D8D8;
+			--fighting: #C03028;
+			--psychic: #F85888;
+			--dark: #705848;
+			--dragon: #7038F8;
+		}
 		img {
 			width: 300px;
 			height: 300px;
@@ -22,57 +44,59 @@
 		}
 
 		#pokemons {
-			width: 90%;
-			
 			margin: auto;
+		    display: grid;
+    		grid-template-columns: repeat(3, 1fr);
+			/* grid-template-columns: repeat(3, minmax(440px, 1fr)); */
+			grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
 		}
 
 		.pokemon_info {
-			float: left;
 			max-width: 400px;
+			max-height: 390px;
 			min-height: 400px;
-			overflow: visible;
+  			min-width: 400px;
+			overflow: hidden;
 			background-color: aliceblue;
 			margin: 10px;
 			padding: 10px;
+			border: black solid;
+			box-shadow: 2px 2px 2px 3px rgba(41, 41, 41, 0.8);
+			
 		}
 		
 		.pokemon_info > p {
-			padding-left: 50px;
+			background-color: rgba(240, 248, 255, 0.2);
+			padding: 10px;
 		}
 
+		#btn-more {
+			display: block;
+			margin: auto;
+  			width: 50%; 	
+			font-size: 48pt;
+		}
 
-		.pokemon_grass {
-			background-color: greenyellow;
-		}
-		.pokemon_fire {
-			background-color: orangered;
-			color: white;
-		}
-		.pokemon_water {
-			background-color: aqua;
-		}
-		.pokemon_electric {
-			background-color: yellow;
-		}
-		.pokemon_bug {
-			background-color: yellowgreen;
-		}
-		.pokemon_poison {
-			background-color: purple;
-			color: white;
-		}
-		.pokemon_ground {
-			background-color: burlywood;
+		#search_pokemon {
+			display: block;
+			font-size: larger;
+			width: 80%;
+			margin: auto;
+
 		}
 	</style>
 </head>
 
 <body>
 
-	<input type="text" id="search_pokemon">
-	<button id="search_button"></button>
-	<div id="pokemons"></div>
+	<input placeholder="Search Pokémon" autocomplete="off" type="text" id="search_pokemon">
+	<div id="pokemons">
+		<h2>loading...</h2>
+		
+	</div>
+	<div>
+		<button id="btn-more">More pokémons <i class="fa fa-plus"></i></button>
+	</div>
 	<script src="app.js"></script>
 </body>
 
