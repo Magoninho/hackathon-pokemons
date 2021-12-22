@@ -1,4 +1,3 @@
-let limit = 9;
 
 function printJson(json) {
 	document.body.innerHTML += JSON.stringify(json);
@@ -95,9 +94,14 @@ function searchPokemon(regex, pokemonData) {
 	return foundPokemons;
 }
 
+
 (async () => {
+	
+	const LIMIT = 151;
 	const myDiv = document.getElementById("pokemons");
-	const pokemonData = await getPokemonData(0, 9);
+	const pokemonData = await getPokemonData(0, LIMIT);
+	
+	let offset = LIMIT;
 	renderPokemons(pokemonData, myDiv);
 
 	let input = document.getElementById("search_pokemon");
@@ -115,11 +119,11 @@ function searchPokemon(regex, pokemonData) {
 	
 	
 	btn_more.addEventListener("click", (async () => {
-		const newPokemonData = await getPokemonData(limit, 9);
+		const newPokemonData = await getPokemonData(offset, LIMIT);
 		for (let i = 0; i < newPokemonData.length; i++) {
 			pokemonData.push(newPokemonData[i]);
 		}
-		limit += 9;
+		offset += LIMIT;
 
 		const newPokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
 
