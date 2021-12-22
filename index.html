@@ -74,7 +74,8 @@
 			display: block;
 			margin: auto;
   			width: 50%; 	
-			font-size: 48pt;
+			font-size: 22pt;
+			cursor: pointer;
 		}
 
 		#search_pokemon {
@@ -88,14 +89,23 @@
 </head>
 
 <body>
-
-	<input placeholder="Search Pokémon" autocomplete="off" type="text" id="search_pokemon">
+	<div style="text-align: center;">
+		<img style="width: 400px;"src="https://pokedex.sleduardo.dev/img/logo.svg" alt="pokedex">
+	</div>
+	<!-- <input placeholder="Search Pokémon" autocomplete="off" type="text" id="search_pokemon"> -->
 	<div id="pokemons">
-		<h2>loading...</h2>
+
+		<div id="loading">
+			<h1>
+				loading...
+			</h1>
+		</div>
 		
 	</div>
 	<div>
+		<br><br>
 		<button id="btn-more">More pokémons <i class="fa fa-plus"></i></button>
+		<br><br>
 	</div>
 	<script src="app.js"></script>
 </body>

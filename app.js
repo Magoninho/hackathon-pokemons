@@ -8,8 +8,7 @@ function printmsg(msg) {
 }
 
 function renderPokemons(pokemons, mainDiv) {
-
-	mainDiv.innerHTML = "";
+	
 	for (let p = 0; p < pokemons.length; p++) {
 		const pokemon = pokemons[p]; // current pokemon
 		let div = document.createElement("div");
@@ -48,7 +47,7 @@ async function getResults() {
 	const response = await fetch(URL);
 	const data = await response.json();
 	return data;
-	
+
 }
 
 async function getPokemons(from, to) {
@@ -74,11 +73,11 @@ async function getPokemonData(offset, limit) {
 		const pokemonData = await pokemonResp.json();
 
 		data.push(pokemonData);
-		//renderPokemon(pokemonData.sprites, pokemonData.name, pokemonData.types);
 	}
 	return data;
 }
 
+// NOT USING
 function searchPokemon(regex, pokemonData) {
 	let foundPokemons = [];
 	for (let p = 0; p < pokemonData.length; p++) {
@@ -96,28 +95,31 @@ function searchPokemon(regex, pokemonData) {
 
 
 (async () => {
-	
-	const LIMIT = 151;
+	const LIMIT = 20;
 	const myDiv = document.getElementById("pokemons");
 	const pokemonData = await getPokemonData(0, LIMIT);
 	
+	// removing the loading text (gambiarra)
+	document.getElementById("loading").parentNode.removeChild(document.getElementById("loading"));
+	myDiv.innerHTML = ""; // clearing div
+
 	let offset = LIMIT;
 	renderPokemons(pokemonData, myDiv);
 
-	let input = document.getElementById("search_pokemon");
+	// let input = document.getElementById("search_pokemon");
 
-	input.addEventListener("input", (async () => {
+	// input.addEventListener("input", (async () => {
 
-		// searching pokemons with the input value
-		let pokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
+	// 	// searching pokemons with the input value
+	// 	let pokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
 
-		renderPokemons(pokemonSearch, myDiv);
+	// 	renderPokemons(pokemonSearch, myDiv);
 
-	}));
+	// }));
 
 	let btn_more = document.getElementById("btn-more");
-	
-	
+
+
 	btn_more.addEventListener("click", (async () => {
 		const newPokemonData = await getPokemonData(offset, LIMIT);
 		for (let i = 0; i < newPokemonData.length; i++) {
@@ -125,9 +127,9 @@ function searchPokemon(regex, pokemonData) {
 		}
 		offset += LIMIT;
 
-		const newPokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
+		// const newPokemonSearch = searchPokemon(new RegExp(`^${input.value.trim().toLowerCase()}`), pokemonData);
 
-		renderPokemons(newPokemonSearch, myDiv);
+		renderPokemons(newPokemonData, myDiv, false);
 	}));
 })();
 
